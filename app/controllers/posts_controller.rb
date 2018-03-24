@@ -1,8 +1,8 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:show, :edit, :update]
+  before_action :set_post, only: [:show, :edit, :update, :destroy]
   
   def index
-    @posts = Post.all
+    @posts = current_user.posts
   end
 
   def new
@@ -24,24 +24,23 @@ class PostsController < ApplicationController
     authorize @post
   end
 
- def update
-  authorize @post
-
-  if @post.update(post_params)
-    redirect_to @post, notice: 'Your post was edited successfully'
-  else
-    render :edit
+  def update
+    authorize @post
+    
+    if @post.update(post_params)
+      redirect_to @post, notice: 'Your post was edited successfully'
+    else
+      render :edit
+    end
   end
-end
 
   def show
   end
 
   def destroy
-      @post.delete
-      redirect_to posts_path, notice: 'Your post was deleted successfully'
+    @post.delete
+    redirect_to posts_path, notice: 'Your post was deleted successfully'
   end
-
 
   private
 

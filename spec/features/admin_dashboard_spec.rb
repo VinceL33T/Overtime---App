@@ -17,4 +17,5 @@ it 'can be reached by an admin users' do
   visit admin_root_path
 
   expect(current_path).to eq(admin_root_path)
-end
+	end
+end 
