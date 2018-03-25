@@ -106,7 +106,7 @@ describe 'navigate' do
 
     it 'cannot be edited by a non authorized user' do
       logout(:user)
-      non_authorized_user = FactoBot.create(:non_authorized_user)
+      non_authorized_user = FactoryBot.create(:non_authorized_user)
       login_as(non_authorized_user, :scope => :user)
 
       visit edit_post_path(post)
